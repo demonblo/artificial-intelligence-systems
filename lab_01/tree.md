@@ -26,4 +26,9 @@ flowchart TD
 КТ ---> upper_medium_count[5001 - 25000]
 КТ ---> high_count[25001 - 50000]
 КТ ---> mega_high_count[50001 +]
+
+ЧС ---> КТ
+ЧС ---> СН
+ЧС ---> ВО
+ЧС ---> СП
 ```

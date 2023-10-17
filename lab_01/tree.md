@@ -13,11 +13,11 @@ flowchart TD
 
 СН ---> Страны[Одна или более из 194 стран]
 
-СП ---> low_cost[0 - 10]
-СП ---> upper_low_cost[11 - 25]
-СП ---> medium_cost[26 - 50]
-СП ---> upper_medium_cost[51 - 100]
-СП ---> high_cost[100 +]
+СП ---> low_cost[0$ - 10$]
+СП ---> upper_low_cost[11$ - 25$]
+СП ---> medium_cost[26$ - 50$]
+СП ---> upper_medium_cost[51$ - 100$]
+СП ---> high_cost[100$ +]
 
 КТ ---> super_low_count[0 - 100]
 КТ ---> low_count[101 - 500]

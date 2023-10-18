@@ -8,7 +8,7 @@ flowchart TD
 
 Гастрономическая ---> Country_of_residence_gastronomic[Страна где находится]
 Гастрономическая ---> Cost_of_visit_gastronomic[Стоимость посещения]
-Гастрономическая ---> Founding_date_gastronomic[Needed_timeемя строительства/основания]
+Гастрономическая ---> Founding_date_gastronomic[Время строительства/основания]
 Гастрономическая ---> Count_of_visitors_gastronomic[Среднее количество посетителей в день]
 
 Country_of_residence_gastronomic ---> Countries_gastronomic[Одна или более из 194 стран]

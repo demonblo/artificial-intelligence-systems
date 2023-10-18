@@ -6,26 +6,26 @@ flowchart TD
 Достопримечательность ---> Гастрономическая
 Достопримечательность ---> World_miracle[Чудо света]
 
-Гастрономическая ---> Country_of_residence[Страна где находится]
-Гастрономическая ---> Cost_of_visit[Стоимость посещения]
-Гастрономическая ---> Founding_date[Needed_timeемя строительства/основания]
-Гастрономическая ---> Count_of_visitors[Среднее количество посетителей в день]
+Гастрономическая ---> Country_of_residence_gastronomic[Страна где находится]
+Гастрономическая ---> Cost_of_visit_gastronomic[Стоимость посещения]
+Гастрономическая ---> Founding_date_gastronomic[Needed_timeемя строительства/основания]
+Гастрономическая ---> Count_of_visitors_gastronomic[Среднее количество посетителей в день]
 
-Country_of_residence ---> Countries[Одна или более из 194 стран]
+Country_of_residence ---> Countries_gastronomic[Одна или более из 194 стран]
 
-Cost_of_visit ---> low_cost[0$ - 10$]
-Cost_of_visit ---> upper_low_cost[11$ - 25$]
-Cost_of_visit ---> medium_cost[26$ - 50$]
-Cost_of_visit ---> upper_medium_cost[51$ - 100$]
-Cost_of_visit ---> high_cost[100$ +]
+Cost_of_visit ---> low_cost_gastronomic[0$ - 10$]
+Cost_of_visit ---> upper_low_cost_gastronomic[11$ - 25$]
+Cost_of_visit ---> medium_cost_gastronomic[26$ - 50$]
+Cost_of_visit ---> upper_medium_cost_gastronomic[51$ - 100$]
+Cost_of_visit ---> high_cost_gastronomic[100$ +]
 
-Count_of_visitors ---> super_low_count[0 - 100]
-Count_of_visitors ---> low_count[101 - 500]
-Count_of_visitors ---> upper_low_count[501 - 1500]
-Count_of_visitors ---> medium_count[1501 - 5000]
-Count_of_visitors ---> upper_medium_count[5001 - 25000]
-Count_of_visitors ---> high_count[25001 - 50000]
-Count_of_visitors ---> mega_high_count[50001 +]
+Count_of_visitors ---> super_low_count_gastronomic[0 - 100]
+Count_of_visitors ---> low_count_gastronomic[101 - 500]
+Count_of_visitors ---> upper_low_count_gastronomic[501 - 1500]
+Count_of_visitors ---> medium_count_gastronomic[1501 - 5000]
+Count_of_visitors ---> upper_medium_count_gastronomic[5001 - 25000]
+Count_of_visitors ---> high_count_gastronomic[25001 - 50000]
+Count_of_visitors ---> mega_high_count_gastronomic[50001 +]
 
 World_miracle ---> Country_of_residence_world_miracle[Страна где находится]
 World_miracle ---> Cost_of_visit_world_miracle[Стоимость посещения]
@@ -35,6 +35,7 @@ World_miracle ---> Guide_world_miracle[Лучше с гидом или без]
 World_miracle ---> Wild_animals_world_miracle[Наличие диких зверей]
 World_miracle ---> Needed_time_world_miracle[Время необходимое для посещения и осмотра]
 World_miracle ---> Relief_features_world_miracle[Наличие рельефных особенностей]
+World_miracle ---> Best_season_for_visit_world_miracle[Лучший сезон для посещения]
 
 Country_of_residence_world_miracle ---> Countries_world_miracle[Одна или более из 194 стран]
 
@@ -69,7 +70,7 @@ Presence_of_unique_animals_world_miracle ---> Presence_of_unique_animals_no_worl
 Relief_features_world_miracle ---> No_rilief_fetures_world_miracle[Нет]
 Relief_features_world_miracle ---> Yes_rilief_fetures_world_miracle[Есть]
 
-
+Best_season_for_visit_world_miracle ---> Period_world_miracle[Период из одного или нескольких месяцев]
 
 
 

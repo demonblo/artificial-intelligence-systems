@@ -53,7 +53,7 @@ if __name__ == "__main__":
 
     countryAdjaMatr = createCountryAdjaMatr(Sights, AsiaMass, EuropeMass, AfricaMass, NorthAmericaMass, MiddleAmericaMass, SouthAmericaMass, OceanMass)
 
-    printFormatMatr(countryAdjaMatr)
+    #printFormatMatr(countryAdjaMatr)
 
     priceAdjaMatr = createPriceAdjaMatr(Sights)
 
@@ -66,10 +66,75 @@ if __name__ == "__main__":
     #printFormatMatr(treeAdjaMatr)
     print("")
     #printFormatMatr(mainAdjaMatr)
-    finalMatr, finalPosMatr = findFiveClosest(mainAdjaMatr, chosenElement)
 
-    print("Исходя из того что вам понравилось " + str(Sights[chosenElement].name) + " рекомендуем вам также посетить нижеперечисленные достопримечательности:")
-    for i in range(countOfRecomendations):
-        print("Название:" + str(Sights[finalPosMatr[i]].name))
-        print("Близость: " + str(finalMatr[i]))
+    print("Здравствуйте! Вас приветствует рекомендательная система 'Хочу туда!'")
+    print("Выберете один из пунктов меню:")
+    print("1. Выбор 1 лайка")
+    print("2. Выбор 1 дизлайка")
+    print("3. Выбор N лайков и M дизлайков")
+    menuSelect = int(input())
+    if menuSelect == 1:
+        for i in range(countOfElements):
+            print(str(i) + " " + Sights[i].name)
+
+        print("Введите номер понравившейся достопримечательности")
+        chosEl = int(input())
+        finalMatr, finalPosMatr = findFiveClosest(mainAdjaMatr, chosEl)
+
+        print("Исходя из того что вам понравилась такая достопримечательность как " + str(Sights[chosEl].name) +
+              ", мы рекомендуем вам посетить нижеперечисленные достопримечательности:")
+        for i in range(countOfRecomendations):
+            print("Название:" + str(Sights[finalPosMatr[i]].name))
+            print("Близость: " + str(finalMatr[i]))
+    elif menuSelect == 2:
+        for i in range(countOfElements):
+            print(str(i) + " " + Sights[i].name)
+
+        print("Введите номер непонравившейся достопримечательности")
+        chosEl = int(input())
+        finalMatr, finalPosMatr = findFiveFurthest(mainAdjaMatr, chosEl)
+        print("Исходя из того что вам не понравилась такая достопримечательность как " + str(Sights[chosEl].name) +
+              ", мы рекомендуем вам посетить нижеперечисленные достопримечательности:")
+        for i in range(countOfRecomendations):
+            print("Название: " + str(Sights[finalPosMatr[i]].name))
+            print("Близость: " + str(finalMatr[i]))
+
+    elif menuSelect == 3:
+        for i in range(countOfElements):
+            print(str(i) + " " + Sights[i].name)
+
+        print("Введите количество понравившихся достопримечательностей")
+        n = int(input())
+        if n > 0:
+            massL = list(range(n))
+            for i in range(n):
+                print("Введите номер " + str(i + 1) + " понравившейся достопримечательности")
+                massL[i] = int(input())
+        else:
+            massL = []
+
+        print("Введите количество непонравившихся достопримечательностей")
+        m = int(input())
+        if m > 0:
+            massD = list(range(m))
+            for i in range(m):
+                print("Введите номер " + str(i + 1) + " непонравившейся достопримечательности")
+                massD[i] = int(input())
+        else:
+            massD = []
+
+        finalPosMatr = findFiveCombined(massL, massD, mainAdjaMatr)
+        print("Ваши предпочтения:")
+        print("Лайки:")
+        for i in range(len(massL)):
+            print(Sights[massL[i]].name)
+        print("Дизлайки:")
+        for i in range(len(massD)):
+            print(Sights[massD[i]].name)
+        print("Исходя из ваших предпочтений, мы подобрали вам нижеперечисленные досторимечательности:")
+        for i in range(len(finalPosMatr)):
+            print("Название: " + str(Sights[finalPosMatr[i]].name))
+
+
+
 

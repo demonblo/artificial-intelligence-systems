@@ -1,6 +1,6 @@
 countOfElements = 50
-countOfRecomendations = 10
-chosenElement = 23
+countOfRecomendations = 5
+chosenElement = 47
 
 class Sight(object):
 
@@ -418,7 +418,7 @@ def createTreeAdjaMatr(Sights):
             elif 0 < Sights[i].treeNumber < 8 < Sights[j].treeNumber < 16:
                 matr[i][j] = 0.8
             elif 0 < Sights[i].treeNumber < 8 and 16 < Sights[j].treeNumber < 23:
-                matr[i][j] = 0.3
+                matr[i][j] = 0.35
             elif 0 < Sights[i].treeNumber < 8 and 23 < Sights[j].treeNumber:
                 matr[i][j] = 0.7
             elif 0 < Sights[j].treeNumber < 8 < Sights[i].treeNumber < 16:  #2 ветка
@@ -431,13 +431,13 @@ def createTreeAdjaMatr(Sights):
                 else:
                     matr[i][j] = 0.75
             elif 8 < Sights[i].treeNumber < 16 < Sights[j].treeNumber < 23:
-                matr[i][j] = 0.3
+                matr[i][j] = 0.35
             elif 8 < Sights[i].treeNumber < 16 and 23 < Sights[j].treeNumber:
                 matr[i][j] = 0.7
             elif 16 < Sights[i].treeNumber < 23 and 0 < Sights[j].treeNumber < 8:  #3 ветка
-                matr[i][j] = 0.3
+                matr[i][j] = 0.35
             elif 8 < Sights[j].treeNumber < 16 < Sights[i].treeNumber < 23:
-                matr[i][j] = 0.3
+                matr[i][j] = 0.35
             elif 16 < Sights[i].treeNumber < 23 and 16 < Sights[j].treeNumber < 23:
                 if i == j:
                     matr[i][j] = 1
@@ -448,13 +448,13 @@ def createTreeAdjaMatr(Sights):
                 else:
                     matr[i][j] = 0.9
             elif 16 < Sights[i].treeNumber < 23 < Sights[j].treeNumber:
-                matr[i][j] = 0.3
+                matr[i][j] = 0.35
             elif 23 < Sights[i].treeNumber and 0 < Sights[j].treeNumber < 8: #4 ветка
                 matr[i][j] = 0.7
             elif 23 < Sights[i].treeNumber and 8 < Sights[j].treeNumber < 16:
                 matr[i][j] = 0.7
-            elif 16 < Sights[j].treeNumber < 23 < Sights[i].treeNumber: 
-                matr[i][j] = 0.3
+            elif 16 < Sights[j].treeNumber < 23 < Sights[i].treeNumber:
+                matr[i][j] = 0.35
             elif 23 < Sights[i].treeNumber and 23 < Sights[j].treeNumber:
                 if i == j:
                     matr[i][j] = 1
@@ -463,9 +463,9 @@ def createTreeAdjaMatr(Sights):
                 elif i > 28:
                     if i > 28 and j > 28 and i != j:
                         matr[i][j] = 0.75
-                    elif i > 28 and j < 28:
+                    elif j < 28 < i :
                         matr[i][j] = 0.7
-                elif i < 28 and j > 28:
+                elif i < 28 < j:
                     matr[i][j] = 0.7
                 else:
                     matr[i][j] = 0.9
@@ -478,21 +478,21 @@ def createMainAdjaMatr(treeAdjaMatr,priceAdjaMatr, countryAdjaMatr):
     for i in range(countOfElements):
         for j in range(countOfElements):
             if treeAdjaMatr[i][j] == 1:
-                kTree = 1
+                kTree = 0.8
             else:
-                kTree = 0.9
+                kTree = 0.7
             if priceAdjaMatr[i][j] == 1:
-                kPrice = 1
+                kPrice = 0.75
             else:
-                kPrice = 0.95
+                kPrice = 0.65
             if countryAdjaMatr[i][j] == 1:
-                kCountry = 1
+                kCountry = 0.75
             else:
-                kCountry = 0.8
+                kCountry = 0.65
             if i == j:
                 matr[i][j] = 1
             else:
-                matr[i][j] = (treeAdjaMatr[i][j] * kTree) * (priceAdjaMatr[i][j] * kPrice) * (countryAdjaMatr[i][j] * kCountry)
+                matr[i][j] = ((treeAdjaMatr[i][j] * kTree) + (priceAdjaMatr[i][j] * kPrice) + (countryAdjaMatr[i][j] * kCountry)) / (kTree + kPrice + kCountry)
 
     return matr
 
@@ -516,6 +516,129 @@ def findFiveClosest(mainAdjaMatr, curRow):
 
     return matr, posMatr
 
+def findFiveFurthest(mainAdjaMatr, curRow):
+
+    matr = list(range(countOfRecomendations))
+    posMatr = list(range(countOfRecomendations))
+    downBorder = 0
+    for i in range(countOfRecomendations):
+        curMin = 1
+        curMinPos = 0
+        for j in range(countOfElements):
+            if curMin > mainAdjaMatr[curRow][j] > downBorder:
+                curMin = mainAdjaMatr[curRow][j]
+                curMinPos = j
+
+        matr[i] = curMin
+        posMatr[i] = curMinPos
+        downBorder = curMin
+
+    return matr, posMatr
+
+
+def findFiveCombined(massL, massD, mainAdjaMatr):
+
+    if len(massL) == 0: # 0 Лайков
+        mn = 1
+        likeMass = list(range(len(massD) * 5))
+        for i in range(len(massD)):
+            matr, posMatr = findFiveClosest(mainAdjaMatr, massD[i])
+            for j in range(len(posMatr)):
+                likeMass[i * 5 + j] = posMatr[j]
+
+        if len(massD) == 2:
+            mn = 3
+        elif len(massD) == 3:
+            mn = 2
+        elif len(massD) >= 4:
+            mn = 1
+
+        curMatr = list(range(len(massD) * mn))
+        pos = 0
+        for i in range(len(massD)):
+            prevMass, prevPosMass = findFiveFurthest(mainAdjaMatr, massD[i])
+            count = 0
+            j = 1
+            while count < mn and j < 5:
+                if prevPosMass[j] not in massD and prevPosMass[j] not in curMatr and prevPosMass[j] not in likeMass:
+                    curMatr[pos] = prevPosMass[j]
+                    pos += 1
+                    count += 1
+                j += 1
+
+        return curMatr
+
+    elif len(massD) == 0: # 0 Дизлайков
+        mn = 1
+        dislikeMass = list(range(len(massL) * 5))
+        for i in range(len(massL)):
+            matr, posMatr = findFiveFurthest(mainAdjaMatr, massL[i])
+            for j in range(len(posMatr)):
+                dislikeMass[i * 5 + j] = posMatr[j]
+
+        if len(massL) == 2:
+            mn = 3
+        elif len(massL) == 3:
+            mn = 2
+        elif len(massL) >= 4:
+            mn = 1
+
+        curMatr = list(range(len(massL) * mn))
+        pos = 0
+        for i in range(len(massL)):
+            prevMass, prevPosMass = findFiveClosest(mainAdjaMatr, massL[i])
+            count = 0
+            j = 1
+            while count < mn and j < 5:
+                if prevPosMass[j] not in massL and prevPosMass[j] not in curMatr and prevPosMass[j] not in dislikeMass:
+                    curMatr[pos] = prevPosMass[j]
+                    pos += 1
+                    count += 1
+                j += 1
+
+        return curMatr
+    else: # n > 0, m > 0
+        mn = 1
+        dislikeMass = list(range(len(massD) * 5))
+        for i in range(len(massD)):
+            matr, posMatr = findFiveClosest(mainAdjaMatr, massD[i])
+            for j in range(len(posMatr)):
+                dislikeMass[i * 5 + j] = posMatr[j]
+
+        if len(massL) == 1:
+            curMatr = list()
+            prevMass, prevPosMass = findFiveClosest(mainAdjaMatr, massL[0])
+            j = 0
+            while j < 5:
+                if prevPosMass[j] not in massL and prevPosMass[j] not in massD and prevPosMass[j] not in dislikeMass:
+                    curMatr.append(prevPosMass[j])
+                j += 1
+            return curMatr
+        elif len(massL) == 2:
+            mn = 3
+        elif len(massL) == 3:
+            mn = 2
+        elif len(massL) >= 4:
+            mn = 1
+
+        curMatr = list()
+        count = 0
+        for i in range(len(massL)):
+            prevMass, prevPosMass = findFiveClosest(mainAdjaMatr, massL[i])
+            j = 0
+            mnCount = 0
+            while mnCount < mn and j < 5:
+                if prevPosMass[j] not in massL and prevPosMass[j] not in curMatr and prevPosMass[j] not in dislikeMass and prevPosMass[j] not in massD:
+                    curMatr.append(prevPosMass[j])
+                    mnCount += 1
+                    count += 1
+                    if count == 5:
+                        return curMatr
+                j += 1
+
+        return curMatr
+
+
 def printFormatMatr(matr):
 
     for i in range(len(matr)):
@@ -530,4 +653,3 @@ def printFormatMatr(matr):
             print(outStr, end="")
 
         print("")
-

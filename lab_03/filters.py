@@ -11,27 +11,27 @@ def getSelectedCountries(Sights, selectedCountriesMass, AsiaMass, EuropeMass, Af
     resultMass = list()
     resultDict = list()
     for i in range(len(Sights)):
-        if Sights[i].country in AsiaMass and 0 in selectedCountriesMass:
-            resultMass.append(Sights[i])
-            resultDict.append(0)
-        elif Sights[i].country in EuropeMass and 1 in selectedCountriesMass:
+        if Sights[i].country in AsiaMass and 1 in selectedCountriesMass:
             resultMass.append(Sights[i])
             resultDict.append(1)
-        elif Sights[i].country in AfricaMass and 2 in selectedCountriesMass:
+        elif Sights[i].country in EuropeMass and 2 in selectedCountriesMass:
             resultMass.append(Sights[i])
             resultDict.append(2)
-        elif Sights[i].country in NorthAmericaMass and 3 in selectedCountriesMass:
+        elif Sights[i].country in AfricaMass and 3 in selectedCountriesMass:
             resultMass.append(Sights[i])
             resultDict.append(3)
-        elif Sights[i].country in MiddleAmericaMass and 4 in selectedCountriesMass:
+        elif Sights[i].country in NorthAmericaMass and 4 in selectedCountriesMass:
             resultMass.append(Sights[i])
             resultDict.append(4)
-        elif Sights[i].country in SouthAmericaMass and 5 in selectedCountriesMass:
+        elif Sights[i].country in MiddleAmericaMass and 5 in selectedCountriesMass:
             resultMass.append(Sights[i])
             resultDict.append(5)
-        elif Sights[i].country in OceanMass and 6 in selectedCountriesMass:
+        elif Sights[i].country in SouthAmericaMass and 6 in selectedCountriesMass:
             resultMass.append(Sights[i])
             resultDict.append(6)
+        elif Sights[i].country in OceanMass and 7 in selectedCountriesMass:
+            resultMass.append(Sights[i])
+            resultDict.append(7)
 
     return resultMass, resultDict
 
@@ -48,19 +48,19 @@ def getSelectedPrice(Sights, minPrice, maxPrice):
 def getSelectedCat(Sights, selectedCatMass):
     resultMass = list()
     for i in range(len(Sights)):
-        if Sights[i].price == 0 and 0 in selectedCatMass:
+        if Sights[i].price == 0 and 1 in selectedCatMass:
             resultMass.append(Sights[i])
-        elif 0 < Sights[i].price <= 10 and 1 in selectedCatMass:
+        elif 0 < Sights[i].price <= 10 and 2 in selectedCatMass:
             resultMass.append(Sights[i])
-        elif 10 < Sights[i].price <= 20 and 2 in selectedCatMass:
+        elif 10 < Sights[i].price <= 20 and 3 in selectedCatMass:
             resultMass.append(Sights[i])
-        elif 20 < Sights[i].price <= 50 and 3 in selectedCatMass:
+        elif 20 < Sights[i].price <= 50 and 4 in selectedCatMass:
             resultMass.append(Sights[i])
-        elif 50 < Sights[i].price <= 100 and 4 in selectedCatMass:
+        elif 50 < Sights[i].price <= 100 and 5 in selectedCatMass:
             resultMass.append(Sights[i])
-        elif 100 < Sights[i].price <= 500 and 5 in selectedCatMass:
+        elif 100 < Sights[i].price <= 500 and 6 in selectedCatMass:
             resultMass.append(Sights[i])
-        elif 500 < Sights[i].price and 6 in selectedCatMass:
+        elif 500 < Sights[i].price and 7 in selectedCatMass:
             resultMass.append(Sights[i])
 
     return resultMass
@@ -130,21 +130,21 @@ def typeFiltration(Sights):
 
 
 def countryFiltration(Sights, AsiaMass, EuropeMass, AfricaMass, NorthAmericaMass, MiddleAmericaMass, SouthAmericaMass, OceanMass):
-    countryDict = {0: "Азия",
-                   1: "Европа",
-                   2: "Африка",
-                   3: "Северная Америка",
-                   4: "Центральная Америка",
-                   5: "Южная Америка",
-                   6: "Австралия и Океания"}
+    countryDict = {1: "Азия",
+                   2: "Европа",
+                   3: "Африка",
+                   4: "Северная Америка",
+                   5: "Центральная Америка",
+                   6: "Южная Америка",
+                   7: "Австралия и Океания"}
     print("Ниже приведен список всех сторон света:")
-    print("1. " + countryDict.get(0))
-    print("2. " + countryDict.get(1))
-    print("3. " + countryDict.get(2))
-    print("4. " + countryDict.get(3))
-    print("5. " + countryDict.get(4))
-    print("6. " + countryDict.get(5))
-    print("7. " + countryDict.get(6))
+    print("1. " + countryDict.get(1))
+    print("2. " + countryDict.get(2))
+    print("3. " + countryDict.get(3))
+    print("4. " + countryDict.get(4))
+    print("5. " + countryDict.get(5))
+    print("6. " + countryDict.get(6))
+    print("7. " + countryDict.get(7))
     print("Введите количество сторон Света, которые вас интересуют(Для отмены введите 0):")
     numbEl = int(input())
     resultMass = Sights

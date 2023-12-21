@@ -60,12 +60,15 @@ if __name__ == "__main__":
         print("0. Выход")
         mainMenuSelection = int(input())
         if mainMenuSelection == 1:
-            resultMass, recMass, filMass = getRecomendationsFirst(resultMass, mainAdjaMatr, AsiaMass, EuropeMass, AfricaMass, NorthAmericaMass, MiddleAmericaMass, SouthAmericaMass, OceanMass)
+            resultMass = getRecomendationsFirst(resultMass, mainAdjaMatr, AsiaMass, EuropeMass, AfricaMass, NorthAmericaMass, MiddleAmericaMass, SouthAmericaMass, OceanMass)
         elif mainMenuSelection == 2:
-            kek = 2
+            resultMass = getFiltrationFirst(resultMass, mainAdjaMatr, AsiaMass, EuropeMass, AfricaMass, NorthAmericaMass, MiddleAmericaMass, SouthAmericaMass, OceanMass)
         elif mainMenuSelection == 3:
             resultMass = Sights
             print("Фильтры и рекомендации были сброшены!")
+        elif mainMenuSelection == 4:
+            print("Список текущих достопримечательностей:")
+            printSightsInfo(resultMass)
         elif mainMenuSelection == 0:
             print("Спасибо что воспользовались нашим сервисом! Надеемся мы вам помогли, до свидания!!!")
             drawHeart()

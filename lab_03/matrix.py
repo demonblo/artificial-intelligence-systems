@@ -641,13 +641,13 @@ def findFiveCombined(massL, massD, mainAdjaMatr):
 
 
 def printResult(Sights, matr, posMatr):
-    for i in range(countOfRecomendations):
+    for i in range(len(Sights)):
         print("Название:" + str(Sights[posMatr[i]].name))
         print("Близость: " + str(matr[i]))
 
 
 def singleLike(Sights, mainAdjaMatr):
-    for i in range(countOfElements):
+    for i in range(len(Sights)):
         print(str(i) + " " + Sights[i].name)
 
     print("Введите номер понравившейся достопримечательности")
@@ -661,7 +661,7 @@ def singleLike(Sights, mainAdjaMatr):
 
 
 def singleDislike(Sights, mainAdjaMatr):
-    for i in range(countOfElements):
+    for i in range(len(Sights)):
         print(str(i) + " " + Sights[i].name)
 
     print("Введите номер непонравившейся достопримечательности")
@@ -675,7 +675,7 @@ def singleDislike(Sights, mainAdjaMatr):
 
 
 def multipleLikesDislikes(Sights, mainAdjaMatr):
-    for i in range(countOfElements):
+    for i in range(len(Sights)):
         print(str(i) + " " + Sights[i].name)
 
     print("Введите количество понравившихся достопримечательностей")
@@ -730,3 +730,41 @@ def printFormatMatr(matr):
             print(outStr, end="")
 
         print("")
+
+def printSightsInfo(Sights):
+    typeDict = {2: "Здание",
+                4: "Группа зданий с единой архитектурой",
+                5: "Группа зданий с различной архитектурой",
+                6: "Архитектурное Чудо Света",
+                7: "Сооружение",
+                10: "Исторический памятник",
+                11: "Памятник искусства",
+                12: "Обычное место с культурной ценностью",
+                14: "Храм крупной религии",
+                15: "Храм малой религии",
+                17: "Природное Чудо Света",
+                18: "Заповедник",
+                19: "Заповедник",
+                20: "Национальный парк",
+                21: "Связанные с водой",
+                22: "Ботанический сад",
+                24: "Стрит-фуд",
+                25: "Ресторан",
+                26: "Рынок",
+                27: "Паб",
+                29: "Ферма",
+                30: "Производство продуктов питания"}
+    for i in range(len(Sights)):
+        print("Название: " + Sights[i].name)
+        print("Тип: " + typeDict.get(Sights[i].treeNumber))
+        print("Страна: " + Sights[i].country)
+        print("Стоимость посещения: " + str(Sights[i].price) + "$")
+        print("Лучшее время для посещения: ", end="")
+        for j in range(len(Sights[i].bestSeason)):
+            print(Sights[i].bestSeason[j], end=", ")
+
+        print("")
+
+
+
+

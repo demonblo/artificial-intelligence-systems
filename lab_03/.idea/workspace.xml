@@ -10,26 +10,26 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/lab_03$main.coverage" NAME="main Coverage Results" MODIFIED="1703157023736" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/lab_03$main.coverage" NAME="main Coverage Results" MODIFIED="1703182670617" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.5">
+    <splitter split-orientation="horizontal" split-proportion="0.4475899">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file leaf-file-name="main.py" pinned="false" current-in-tab="false">
+          <file leaf-file-name="main.py" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/main.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="310">
-                  <caret line="62" column="31" selection-start-line="62" selection-start-column="31" selection-end-line="62" selection-end-column="31" />
+                <state relative-caret-position="885">
+                  <caret line="59" column="25" selection-start-line="59" selection-start-column="25" selection-end-line="59" selection-end-column="25" />
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="actions.py" pinned="false" current-in-tab="true">
+          <file leaf-file-name="actions.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/actions.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="472">
-                  <caret line="110" lean-forward="true" selection-start-line="110" selection-end-line="110" />
+                <state relative-caret-position="3766">
+                  <caret line="266" column="36" lean-forward="true" selection-start-line="266" selection-start-column="36" selection-end-line="266" selection-end-column="36" />
                   <folding>
                     <element signature="e#0#20#0" expanded="true" />
                   </folding>
@@ -40,8 +40,8 @@
           <file leaf-file-name="filters.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/filters.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-142">
-                  <caret line="297" column="21" lean-forward="true" selection-start-line="297" selection-start-column="21" selection-end-line="297" selection-end-column="21" />
+                <state relative-caret-position="277">
+                  <caret line="61" column="40" lean-forward="true" selection-start-line="61" selection-start-column="40" selection-end-line="61" selection-end-column="40" />
                 </state>
               </provider>
             </entry>
@@ -50,20 +50,20 @@
       </split-first>
       <split-second>
         <leaf>
-          <file leaf-file-name="filters.py" pinned="false" current-in-tab="true">
+          <file leaf-file-name="filters.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/filters.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="1375">
-                  <caret line="297" column="21" selection-start-line="297" selection-start-column="21" selection-end-line="297" selection-end-column="21" />
+                <state relative-caret-position="197">
+                  <caret line="23" column="40" lean-forward="true" selection-start-line="23" selection-start-column="40" selection-end-line="23" selection-end-column="40" />
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="matrix.py" pinned="false" current-in-tab="false">
+          <file leaf-file-name="matrix.py" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/matrix.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="8895">
-                  <caret line="717" selection-start-line="717" selection-end-line="717" />
+                <state relative-caret-position="1793">
+                  <caret line="643" column="29" selection-start-line="643" selection-start-column="29" selection-end-line="643" selection-end-column="29" />
                 </state>
               </provider>
             </entry>
@@ -95,10 +95,11 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/matrix.py" />
-        <option value="$PROJECT_DIR$/main.py" />
-        <option value="$PROJECT_DIR$/filters.py" />
+        <option value="$PROJECT_DIR$/kek.py" />
         <option value="$PROJECT_DIR$/actions.py" />
+        <option value="$PROJECT_DIR$/filters.py" />
+        <option value="$PROJECT_DIR$/main.py" />
+        <option value="$PROJECT_DIR$/matrix.py" />
       </list>
     </option>
   </component>
@@ -193,14 +194,13 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="12" />
       <window_info anchor="bottom" id="Event Log" order="5" sideWeight="0.5007153" side_tool="true" weight="0.2581818" />
       <window_info anchor="bottom" id="Database Changes" order="2" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="1" show_stripe_button="false" />
       <window_info anchor="bottom" id="Python Console" order="3" />
-      <window_info anchor="bottom" id="Run" order="8" sideWeight="0.49928468" visible="true" weight="0.2581818" />
+      <window_info active="true" anchor="bottom" id="Run" order="8" sideWeight="0.49928468" visible="true" weight="0.11272727" />
       <window_info anchor="bottom" id="Terminal" order="4" weight="0.32969698" />
       <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.06509299" />
       <window_info anchor="bottom" id="Docker" order="0" show_stripe_button="false" />
@@ -226,7 +226,14 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="12" />
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/actions.py</url>
+          <line>260</line>
+          <option name="timeStamp" value="15" />
+        </line-breakpoint>
+      </breakpoints>
+      <option name="time" value="16" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
@@ -258,6 +265,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/kek.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="930">
+          <caret line="62" selection-start-line="62" selection-end-line="62" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file:///Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/codecs.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="156">
@@ -267,39 +281,39 @@
     </entry>
     <entry file="file:///Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/urllib/parse.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="156">
+        <state relative-caret-position="351">
           <caret line="810" selection-start-line="810" selection-end-line="810" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="310">
-          <caret line="62" column="31" selection-start-line="62" selection-start-column="31" selection-end-line="62" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/matrix.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="8895">
-          <caret line="717" selection-start-line="717" selection-end-line="717" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/filters.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-142">
-          <caret line="297" column="21" lean-forward="true" selection-start-line="297" selection-start-column="21" selection-end-line="297" selection-end-column="21" />
+        <state relative-caret-position="197">
+          <caret line="23" column="40" lean-forward="true" selection-start-line="23" selection-start-column="40" selection-end-line="23" selection-end-column="40" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/actions.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="472">
-          <caret line="110" lean-forward="true" selection-start-line="110" selection-end-line="110" />
+        <state relative-caret-position="3766">
+          <caret line="266" column="36" lean-forward="true" selection-start-line="266" selection-start-column="36" selection-end-line="266" selection-end-column="36" />
           <folding>
             <element signature="e#0#20#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="885">
+          <caret line="59" column="25" selection-start-line="59" selection-start-column="25" selection-end-line="59" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/matrix.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1793">
+          <caret line="643" column="29" selection-start-line="643" selection-start-column="29" selection-end-line="643" selection-end-column="29" />
         </state>
       </provider>
     </entry>

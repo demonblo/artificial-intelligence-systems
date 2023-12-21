@@ -603,7 +603,8 @@ def findFiveCombined(massL, massD, mainAdjaMatr):
         for i in range(len(massD)):
             matr, posMatr = findFiveClosest(mainAdjaMatr, massD[i])
             for j in range(len(posMatr)):
-                dislikeMass[i * 5 + j] = posMatr[j]
+                if matr[j] > 0.83:
+                    dislikeMass[i * 5 + j] = posMatr[j]
 
         if len(massL) == 1:
             curMatr = list()
@@ -639,8 +640,84 @@ def findFiveCombined(massL, massD, mainAdjaMatr):
         return curMatr
 
 
-def printFormatMatr(matr):
+def printResult(Sights, matr, posMatr):
+    for i in range(countOfRecomendations):
+        print("Название:" + str(Sights[posMatr[i]].name))
+        print("Близость: " + str(matr[i]))
 
+
+def singleLike(Sights, mainAdjaMatr):
+    for i in range(countOfElements):
+        print(str(i) + " " + Sights[i].name)
+
+    print("Введите номер понравившейся достопримечательности")
+    chosEl = int(input())
+    resultMatr, resultPosMatr = findFiveClosest(mainAdjaMatr, chosEl)
+    print("Исходя из того что вам понравилась такая достопримечательность как " + str(Sights[chosEl].name) +
+          ", мы рекомендуем вам посетить нижеперечисленные достопримечательности:")
+    printResult(Sights, resultMatr, resultPosMatr)
+
+    return resultMatr, resultPosMatr
+
+
+def singleDislike(Sights, mainAdjaMatr):
+    for i in range(countOfElements):
+        print(str(i) + " " + Sights[i].name)
+
+    print("Введите номер непонравившейся достопримечательности")
+    chosEl = int(input())
+    resultMatr, resultPosMatr = findFiveFurthest(mainAdjaMatr, chosEl)
+    print("Исходя из того что вам не понравилась такая достопримечательность как " + str(Sights[chosEl].name) +
+          ", мы рекомендуем вам посетить нижеперечисленные достопримечательности:")
+    printResult(Sights, resultMatr, resultPosMatr)
+
+    return resultMatr, resultPosMatr
+
+
+def multipleLikesDislikes(Sights, mainAdjaMatr):
+    for i in range(countOfElements):
+        print(str(i) + " " + Sights[i].name)
+
+    print("Введите количество понравившихся достопримечательностей")
+    n = int(input())
+    if n > 0:
+        massL = list()
+        for i in range(n):
+            print("Введите номер " + str(i + 1) + " понравившейся достопримечательности")
+            inNumb = int(input())
+            if inNumb not in massL:
+                massL.append(inNumb)
+    else:
+        massL = []
+
+    print("Введите количество непонравившихся достопримечательностей")
+    m = int(input())
+    if m > 0:
+        massD = list()
+        for i in range(m):
+            print("Введите номер " + str(i + 1) + " непонравившейся достопримечательности")
+            inNumb = int(input())
+            if inNumb not in massD:
+                massD.append(inNumb)
+    else:
+        massD = []
+
+    finalPosMatr = findFiveCombined(massL, massD, mainAdjaMatr)
+    print("Ваши предпочтения:")
+    print("Лайки:")
+    for i in range(len(massL)):
+        print(Sights[massL[i]].name)
+    print("Дизлайки:")
+    for i in range(len(massD)):
+        print(Sights[massD[i]].name)
+    print("Исходя из ваших предпочтений, мы подобрали вам нижеперечисленные досторимечательности:")
+    for i in range(len(finalPosMatr)):
+        print("Название: " + str(Sights[finalPosMatr[i]].name))
+
+    return finalPosMatr
+
+
+def printFormatMatr(matr):
     for i in range(len(matr)):
         for j in range(len(matr[i])):
             outStr = ""

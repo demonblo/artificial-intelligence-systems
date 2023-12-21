@@ -1,6 +1,6 @@
 countOfElements = 50
 countOfRecomendations = 5
-chosenElement = 47
+
 
 class Sight(object):
 
@@ -191,10 +191,9 @@ def outputCountryInfo(Sights, AsiaMass, EuropeMass, AfricaMass, NorthAmericaMass
 
 
 def createCountryAdjaMatr(Sights, AsiaMass, EuropeMass, AfricaMass, NorthAmericaMass, MiddleAmericaMass, SouthAmericaMass, OceanMass):
-    matr = [[0] * countOfElements for i in range(countOfElements)]
-
-    for i in range(countOfElements):
-        for j in range(countOfElements):
+    matr = [[0] * len(Sights) for i in range(len(Sights))]
+    for i in range(len(Sights)):
+        for j in range(len(Sights)):
             if Sights[i].country in AsiaMass and Sights[j].country in AsiaMass:########## Asia
                 matr[i][j] = 1
             elif Sights[i].country in AsiaMass and Sights[j].country in OceanMass:
@@ -296,11 +295,11 @@ def createCountryAdjaMatr(Sights, AsiaMass, EuropeMass, AfricaMass, NorthAmerica
 
     return matr
 
-def createPriceAdjaMatr(Sights):
 
-    matr = [[0] * countOfElements for i in range(countOfElements)]
-    for i in range(countOfElements):
-        for j in range(countOfElements):
+def createPriceAdjaMatr(Sights):
+    matr = [[0] * len(Sights) for i in range(len(Sights))]
+    for i in range(len(Sights)):
+        for j in range(len(Sights)):
             if (Sights[i].price == 0) and (Sights[j].price == 0):  # 0
                 matr[i][j] = 1
             elif (Sights[i].price == 0) and (0 < Sights[j].price <= 10):
@@ -402,10 +401,11 @@ def createPriceAdjaMatr(Sights):
 
     return matr
 
+
 def createTreeAdjaMatr(Sights):
-    matr = [[0] * countOfElements for i in range(countOfElements)]
-    for i in range(countOfElements):
-        for j in range(countOfElements):
+    matr = [[0] * len(Sights) for i in range(len(Sights))]
+    for i in range(len(Sights)):
+        for j in range(len(Sights)):
             if 0 < Sights[i].treeNumber < 8 and 0 < Sights[j].treeNumber < 8:
                 if i == j:
                     matr[i][j] = 1
@@ -473,10 +473,10 @@ def createTreeAdjaMatr(Sights):
     return matr
 
 
-def createMainAdjaMatr(treeAdjaMatr,priceAdjaMatr, countryAdjaMatr):
-    matr = [[0] * countOfElements for i in range(countOfElements)]
-    for i in range(countOfElements):
-        for j in range(countOfElements):
+def createMainAdjaMatr(Sights, treeAdjaMatr,priceAdjaMatr, countryAdjaMatr):
+    matr = [[0] * len(Sights) for i in range(len(Sights))]
+    for i in range(len(Sights)):
+        for j in range(len(Sights)):
             if treeAdjaMatr[i][j] == 1:
                 kTree = 0.8
             else:
@@ -498,7 +498,6 @@ def createMainAdjaMatr(treeAdjaMatr,priceAdjaMatr, countryAdjaMatr):
 
 
 def findFiveClosest(mainAdjaMatr, curRow):
-
     matr = list(range(countOfRecomendations))
     posMatr = list(range(countOfRecomendations))
     upBorder = 1
@@ -516,8 +515,8 @@ def findFiveClosest(mainAdjaMatr, curRow):
 
     return matr, posMatr
 
-def findFiveFurthest(mainAdjaMatr, curRow):
 
+def findFiveFurthest(mainAdjaMatr, curRow):
     matr = list(range(countOfRecomendations))
     posMatr = list(range(countOfRecomendations))
     downBorder = 0
@@ -536,8 +535,45 @@ def findFiveFurthest(mainAdjaMatr, curRow):
     return matr, posMatr
 
 
-def findFiveCombined(massL, massD, mainAdjaMatr):
+def findFiveClosestAfter(Sights, mainAdjaMatr, curRow):
+    matr = list(range(countOfRecomendations))
+    posMatr = list(range(countOfRecomendations))
+    upBorder = 1
+    for i in range(countOfRecomendations):
+        curMax = 0
+        curMaxPos = 0
+        for j in range(len(Sights)):
+            if curMax < mainAdjaMatr[curRow][j] < upBorder:
+                curMax = mainAdjaMatr[curRow][j]
+                curMaxPos = j
 
+        matr[i] = curMax
+        posMatr[i] = curMaxPos
+        upBorder = curMax
+
+    return matr, posMatr
+
+
+def findFiveFurthestAfter(Sights, mainAdjaMatr, curRow):
+    matr = list(range(countOfRecomendations))
+    posMatr = list(range(countOfRecomendations))
+    downBorder = 0
+    for i in range(countOfRecomendations):
+        curMin = 1
+        curMinPos = 0
+        for j in range(len(Sights)):
+            if curMin > mainAdjaMatr[curRow][j] > downBorder:
+                curMin = mainAdjaMatr[curRow][j]
+                curMinPos = j
+
+        matr[i] = curMin
+        posMatr[i] = curMinPos
+        downBorder = curMin
+
+    return matr, posMatr
+
+
+def findFiveCombined(massL, massD, mainAdjaMatr):
     if len(massL) == 0: # 0 Лайков
         mn = 1
         likeMass = list(range(len(massD) * 5))
@@ -640,8 +676,111 @@ def findFiveCombined(massL, massD, mainAdjaMatr):
         return curMatr
 
 
+def findFiveCombinedAfter(Sights, massL, massD, mainAdjaMatr):
+    if len(massL) == 0: # 0 Лайков
+        mn = 1
+        likeMass = list(range(len(massD) * 5))
+        for i in range(len(massD)):
+            matr, posMatr = findFiveClosestAfter(Sights, mainAdjaMatr, massD[i])
+            for j in range(len(posMatr)):
+                likeMass[i * 5 + j] = posMatr[j]
+
+        if len(massD) == 2:
+            mn = 3
+        elif len(massD) == 3:
+            mn = 2
+        elif len(massD) >= 4:
+            mn = 1
+
+        curMatr = list(range(len(massD) * mn))
+        pos = 0
+        for i in range(len(massD)):
+            prevMass, prevPosMass = findFiveFurthestAfter(Sights, mainAdjaMatr, massD[i])
+            count = 0
+            j = 1
+            while count < mn and j < 5:
+                if prevPosMass[j] not in massD and prevPosMass[j] not in curMatr and prevPosMass[j] not in likeMass:
+                    curMatr[pos] = prevPosMass[j]
+                    pos += 1
+                    count += 1
+                j += 1
+
+        return curMatr
+
+    elif len(massD) == 0: # 0 Дизлайков
+        mn = 1
+        dislikeMass = list(range(len(massL) * 5))
+        for i in range(len(massL)):
+            matr, posMatr = findFiveFurthestAfter(Sights, mainAdjaMatr, massL[i])
+            for j in range(len(posMatr)):
+                dislikeMass[i * 5 + j] = posMatr[j]
+
+        if len(massL) == 2:
+            mn = 3
+        elif len(massL) == 3:
+            mn = 2
+        elif len(massL) >= 4:
+            mn = 1
+
+        curMatr = list(range(len(massL) * mn))
+        pos = 0
+        for i in range(len(massL)):
+            prevMass, prevPosMass = findFiveClosestAfter(Sights, mainAdjaMatr, massL[i])
+            count = 0
+            j = 1
+            while count < mn and j < 5:
+                if prevPosMass[j] not in massL and prevPosMass[j] not in curMatr and prevPosMass[j] not in dislikeMass:
+                    curMatr[pos] = prevPosMass[j]
+                    pos += 1
+                    count += 1
+                j += 1
+
+        return curMatr
+    else: # n > 0, m > 0
+        mn = 1
+        dislikeMass = list(range(len(massD) * 5))
+        for i in range(len(massD)):
+            matr, posMatr = findFiveClosestAfter(Sights, mainAdjaMatr, massD[i])
+            for j in range(len(posMatr)):
+                if matr[j] > 0.83:
+                    dislikeMass[i * 5 + j] = posMatr[j]
+
+        if len(massL) == 1:
+            curMatr = list()
+            prevMass, prevPosMass = findFiveClosestAfter(Sights, mainAdjaMatr, massL[0])
+            j = 0
+            while j < 5:
+                if prevPosMass[j] not in massL and prevPosMass[j] not in massD and prevPosMass[j] not in dislikeMass:
+                    curMatr.append(prevPosMass[j])
+                j += 1
+            return curMatr
+        elif len(massL) == 2:
+            mn = 3
+        elif len(massL) == 3:
+            mn = 2
+        elif len(massL) >= 4:
+            mn = 1
+
+        curMatr = list()
+        count = 0
+        for i in range(len(massL)):
+            prevMass, prevPosMass = findFiveClosestAfter(Sights, mainAdjaMatr, massL[i])
+            j = 0
+            mnCount = 0
+            while mnCount < mn and j < 5:
+                if prevPosMass[j] not in massL and prevPosMass[j] not in curMatr and prevPosMass[j] not in dislikeMass and prevPosMass[j] not in massD:
+                    curMatr.append(prevPosMass[j])
+                    mnCount += 1
+                    count += 1
+                    if count == 5:
+                        return curMatr
+                j += 1
+
+        return curMatr
+
+
 def printResult(Sights, matr, posMatr):
-    for i in range(len(Sights)):
+    for i in range(countOfRecomendations):
         print("Название:" + str(Sights[posMatr[i]].name))
         print("Близость: " + str(matr[i]))
 
@@ -667,6 +806,34 @@ def singleDislike(Sights, mainAdjaMatr):
     print("Введите номер непонравившейся достопримечательности")
     chosEl = int(input())
     resultMatr, resultPosMatr = findFiveFurthest(mainAdjaMatr, chosEl)
+    print("Исходя из того что вам не понравилась такая достопримечательность как " + str(Sights[chosEl].name) +
+          ", мы рекомендуем вам посетить нижеперечисленные достопримечательности:")
+    printResult(Sights, resultMatr, resultPosMatr)
+
+    return resultMatr, resultPosMatr
+
+
+def singleLikeAfter(Sights, mainAdjaMatr):
+    for i in range(len(Sights)):
+        print(str(i) + " " + Sights[i].name)
+
+    print("Введите номер понравившейся достопримечательности")
+    chosEl = int(input())
+    resultMatr, resultPosMatr = findFiveClosestAfter(Sights, mainAdjaMatr, chosEl)
+    print("Исходя из того что вам понравилась такая достопримечательность как " + str(Sights[chosEl].name) +
+          ", мы рекомендуем вам посетить нижеперечисленные достопримечательности:")
+    printResult(Sights, resultMatr, resultPosMatr)
+
+    return resultMatr, resultPosMatr
+
+
+def singleDislikeAfter(Sights, mainAdjaMatr):
+    for i in range(len(Sights)):
+        print(str(i) + " " + Sights[i].name)
+
+    print("Введите номер непонравившейся достопримечательности")
+    chosEl = int(input())
+    resultMatr, resultPosMatr = findFiveFurthestAfter(Sights, mainAdjaMatr, chosEl)
     print("Исходя из того что вам не понравилась такая достопримечательность как " + str(Sights[chosEl].name) +
           ", мы рекомендуем вам посетить нижеперечисленные достопримечательности:")
     printResult(Sights, resultMatr, resultPosMatr)
@@ -717,6 +884,49 @@ def multipleLikesDislikes(Sights, mainAdjaMatr):
     return finalPosMatr
 
 
+def multipleLikesDislikesAfter(Sights, mainAdjaMatr):
+    for i in range(len(Sights)):
+        print(str(i) + " " + Sights[i].name)
+
+    print("Введите количество понравившихся достопримечательностей")
+    n = int(input())
+    if n > 0:
+        massL = list()
+        for i in range(n):
+            print("Введите номер " + str(i + 1) + " понравившейся достопримечательности")
+            inNumb = int(input())
+            if inNumb not in massL:
+                massL.append(inNumb)
+    else:
+        massL = []
+
+    print("Введите количество непонравившихся достопримечательностей")
+    m = int(input())
+    if m > 0:
+        massD = list()
+        for i in range(m):
+            print("Введите номер " + str(i + 1) + " непонравившейся достопримечательности")
+            inNumb = int(input())
+            if inNumb not in massD:
+                massD.append(inNumb)
+    else:
+        massD = []
+
+    finalPosMatr = findFiveCombinedAfter(Sights, massL, massD, mainAdjaMatr)
+    print("Ваши предпочтения:")
+    print("Лайки:")
+    for i in range(len(massL)):
+        print(Sights[massL[i]].name)
+    print("Дизлайки:")
+    for i in range(len(massD)):
+        print(Sights[massD[i]].name)
+    print("Исходя из ваших предпочтений, мы подобрали вам нижеперечисленные досторимечательности:")
+    for i in range(len(finalPosMatr)):
+        print("Название: " + str(Sights[finalPosMatr[i]].name))
+
+    return finalPosMatr
+
+
 def printFormatMatr(matr):
     for i in range(len(matr)):
         for j in range(len(matr[i])):
@@ -730,6 +940,7 @@ def printFormatMatr(matr):
             print(outStr, end="")
 
         print("")
+
 
 def printSightsInfo(Sights):
     typeDict = {2: "Здание",
@@ -764,7 +975,3 @@ def printSightsInfo(Sights):
             print(Sights[i].bestSeason[j], end=", ")
 
         print("")
-
-
-
-

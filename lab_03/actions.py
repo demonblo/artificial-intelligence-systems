@@ -142,7 +142,8 @@ def getRecomendationsFirst(Sights, mainAdjaMatr, AsiaMass, EuropeMass, AfricaMas
 
     return finalResultMass
 
-def getFiltrationFirst(Sights, mainAdjaMatr, AsiaMass, EuropeMass, AfricaMass, NorthAmericaMass, MiddleAmericaMass, SouthAmericaMass, OceanMass):
+
+def getFiltrationFirst(Sights, AsiaMass, EuropeMass, AfricaMass, NorthAmericaMass, MiddleAmericaMass, SouthAmericaMass, OceanMass):
     # Фильтрация
     filtrationFlag = False
     while not filtrationFlag:
@@ -210,7 +211,40 @@ def getFiltrationFirst(Sights, mainAdjaMatr, AsiaMass, EuropeMass, AfricaMass, N
                     print(";(")
                     print("Некорректный ввод, выберите пункт еще раз!")
 
-    recomendationsFlag = False # Рекомендации
+    # Рекомендации
+    recomendationsFlag = False
+    countryAdjaMatr = createCountryAdjaMatr(resultMass, AsiaMass, EuropeMass, AfricaMass, NorthAmericaMass,
+                                            MiddleAmericaMass, SouthAmericaMass, OceanMass)
+    priceAdjaMatr = createPriceAdjaMatr(resultMass)
+    treeAdjaMatr = createTreeAdjaMatr(resultMass)
+    mainAdjaMatr = createMainAdjaMatr(resultMass, treeAdjaMatr, priceAdjaMatr, countryAdjaMatr)
+    # КОСТЫЛЬ КОСТЫЛЬ КОСТЫЛЬ КОСТЫЛЬ КОСТЫЛЬ КОСТЫЛЬ КОСТЫЛЬ КОСТЫЛЬ КОСТЫЛЬ КОСТЫЛЬ КОСТЫЛЬ КОСТЫЛЬ КОСТЫЛЬ КОСТЫЛЬ КОСТЫЛЬ КОСТЫЛЬ КОСТЫЛЬ КОСТЫЛЬ КОСТЫЛЬ КОСТЫЛЬ КОСТЫЛЬ КОСТЫЛЬ КОСТЫЛЬ КОСТЫЛЬ КОСТЫЛЬ КОСТЫЛЬ КОСТЫЛЬ КОСТЫЛЬ КОСТЫЛЬ КОСТЫЛЬ
+    if len(resultMass) == 1:
+        print("Так как после фильтрации подошла только 1 достопримечательность, то мы можем вам порекомендовать только её :)")
+        finalResultMass = [resultMass[0]]
+        recomendationsFlag = True
+        printSightsInfo(resultMass)
+    elif len(resultMass) == 2:
+        print("Так как отфильтрованных достопримечательностей только 2, их мы вам и рекомендуем :)")
+        finalResultMass = [resultMass[0], resultMass[1]]
+        printSightsInfo(resultMass)
+        recomendationsFlag = True
+    elif len(resultMass) == 3:
+        print("Так как отфильтрованных достопримечательностей только 3, их мы вам и рекомендуем :)")
+        finalResultMass = [resultMass[0], resultMass[1], resultMass[2]]
+        printSightsInfo(resultMass)
+        recomendationsFlag = True
+    elif len(resultMass) == 4:
+        print("Так как отфильтрованных достопримечательностей только 4, их мы вам и рекомендуем :)")
+        finalResultMass = [resultMass[0], resultMass[1], resultMass[2], resultMass[3]]
+        printSightsInfo(resultMass)
+        recomendationsFlag = True
+    elif len(resultMass) == 5:
+        print("Так как отфильтрованных достопримечательностей только 5, их мы вам и рекомендуем :)")
+        finalResultMass = [resultMass[0], resultMass[1], resultMass[2], resultMass[3], resultMass[4]]
+        printSightsInfo(resultMass)
+        recomendationsFlag = True
+    # КОСТЫЛЬ КОСТЫЛЬ КОСТЫЛЬ КОСТЫЛЬ КОСТЫЛЬ КОСТЫЛЬ КОСТЫЛЬ КОСТЫЛЬ КОСТЫЛЬ КОСТЫЛЬ КОСТЫЛЬ КОСТЫЛЬ КОСТЫЛЬ КОСТЫЛЬ КОСТЫЛЬ КОСТЫЛЬ КОСТЫЛЬ КОСТЫЛЬ КОСТЫЛЬ КОСТЫЛЬ КОСТЫЛЬ КОСТЫЛЬ КОСТЫЛЬ КОСТЫЛЬ КОСТЫЛЬ КОСТЫЛЬ КОСТЫЛЬ КОСТЫЛЬ КОСТЫЛЬ КОСТЫЛЬ
     while not recomendationsFlag:
         print("Выберите вариант составления рекомендаций:")
         print("1. Выбор 1 лайка")
@@ -221,32 +255,28 @@ def getFiltrationFirst(Sights, mainAdjaMatr, AsiaMass, EuropeMass, AfricaMass, N
         check = False
         menuSelect = 1
         finalResultMass = list()
-        recomendationsMass = resultMass
         while menuSelect != 0:
             menuSelect = int(input())
             if menuSelect == 1:
                 skipFlag = False
-                resultMatr, resultPosMatr = singleLike(resultMass, mainAdjaMatr)
+                resultMatr, resultPosMatr = singleLikeAfter(resultMass, mainAdjaMatr)
                 for i in range(len(resultMass)):
                     if i in resultPosMatr:
                         finalResultMass.append(resultMass[i])
-                        recomendationsMass.append(resultMass[i])
                 menuSelect = 0
             elif menuSelect == 2:
                 skipFlag = False
-                resultMatr, resultPosMatr = singleDislike(resultMass, mainAdjaMatr)
+                resultMatr, resultPosMatr = singleDislikeAfter(resultMass, mainAdjaMatr)
                 for i in range(len(resultMass)):
                     if i in resultPosMatr:
                         finalResultMass.append(resultMass[i])
-                        recomendationsMass.append(resultMass[i])
                 menuSelect = 0
             elif menuSelect == 3:
                 skipFlag = False
-                resultMatr = multipleLikesDislikes(resultMass, mainAdjaMatr)
+                resultMatr = multipleLikesDislikesAfter(resultMass, mainAdjaMatr)
                 for i in range(len(resultMass)):
                     if i in resultMatr:
                         finalResultMass.append(resultMass[i])
-                        recomendationsMass.append(resultMass[i])
                 menuSelect = 0
             elif menuSelect == 0:
                 print("Этап составления рекомендаций пропущен")
@@ -276,6 +306,5 @@ def getFiltrationFirst(Sights, mainAdjaMatr, AsiaMass, EuropeMass, AfricaMass, N
                     print("Некорректный ввод, выберите пункт еще раз!")
         elif skipFlag:
             finalResultMass = resultMass
-
 
     return finalResultMass

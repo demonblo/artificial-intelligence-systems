@@ -174,6 +174,7 @@ def countryFiltration(Sights, AsiaMass, EuropeMass, AfricaMass, NorthAmericaMass
 
     return resultMass
 
+
 def priceFiltration(Sights):
     print("Введите минимальную цену посещения достопримечательности(без значка '$', только число):")
     resultMass = Sights
@@ -242,6 +243,7 @@ def priceCatFiltration(Sights):
 
     return resultMass
 
+
 def monthFiltration(Sights):
     monthDict = {1: "январь",
                  2: "февраль",
@@ -296,4 +298,3 @@ def monthFiltration(Sights):
         print("")
 
     return resultMass
-

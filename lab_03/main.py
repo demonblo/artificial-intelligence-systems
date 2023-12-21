@@ -46,7 +46,7 @@ if __name__ == "__main__":
     countryAdjaMatr = createCountryAdjaMatr(Sights, AsiaMass, EuropeMass, AfricaMass, NorthAmericaMass, MiddleAmericaMass, SouthAmericaMass, OceanMass)
     priceAdjaMatr = createPriceAdjaMatr(Sights)
     treeAdjaMatr = createTreeAdjaMatr(Sights)
-    mainAdjaMatr = createMainAdjaMatr(treeAdjaMatr, priceAdjaMatr, countryAdjaMatr)
+    mainAdjaMatr = createMainAdjaMatr(Sights, treeAdjaMatr, priceAdjaMatr, countryAdjaMatr)
     mainMenuSelection = 10
     resultMass = Sights
     print("Здравствуйте! Вас приветствует рекомендательная система ", end="")
@@ -57,20 +57,31 @@ if __name__ == "__main__":
         print("2. Фильтрация, а затем рекомендация на основе лайков/дизлайков")
         print("3. Сбросить фильтры и рекомендации")
         print("4. Вывести текущий список достопримечательностей")
+        print("5. 'Я УСТАЛ'")
         print("0. Выход")
         mainMenuSelection = int(input())
         if mainMenuSelection == 1:
             resultMass = getRecomendationsFirst(resultMass, mainAdjaMatr, AsiaMass, EuropeMass, AfricaMass, NorthAmericaMass, MiddleAmericaMass, SouthAmericaMass, OceanMass)
         elif mainMenuSelection == 2:
-            resultMass = getFiltrationFirst(resultMass, mainAdjaMatr, AsiaMass, EuropeMass, AfricaMass, NorthAmericaMass, MiddleAmericaMass, SouthAmericaMass, OceanMass)
+            resultMass = getFiltrationFirst(resultMass, AsiaMass, EuropeMass, AfricaMass, NorthAmericaMass, MiddleAmericaMass, SouthAmericaMass, OceanMass)
         elif mainMenuSelection == 3:
             resultMass = Sights
             print("Фильтры и рекомендации были сброшены!")
         elif mainMenuSelection == 4:
             print("Список текущих достопримечательностей:")
             printSightsInfo(resultMass)
+        elif mainMenuSelection == 5:
+            pivo = [Sights[13]]
+            print("Как мы вас понимаем... Поэтому прдлегаем посетить самую известную и самую лучше пивную во всем МИРЕ - Хофбройхаус!!!")
+            print("От себя добавим что там официанты обслуживают гостей только на немецком, поэтому подскажем вам самые главные фразы:")
+            print("Guten tag - добрый день")
+            print("Eine Tasse dunkles Bier, bitte - одну кружку тёмного пива, пожалуйста")
+            print("Eine Tasse helles Bier, bitte - одну кружку светлого пива, пожалуйста")
+            print("Danke - спасибо")
+            print("Eine Portion bayerische Würstchen, bitte - одну порцию баварских сосисок, пожалуйста")
+            print("Bringen Sie mir die Rechnung, bitte - принесите мне счёт, пожалуйста")
+            print("Auf Wiedersehen - до свидания")
+            printSightsInfo(pivo)
         elif mainMenuSelection == 0:
             print("Спасибо что воспользовались нашим сервисом! Надеемся мы вам помогли, до свидания!!!")
             drawHeart()
-    ##elif menuSelect == 4:
-    #   filtersMenu(Sights, AsiaMass, EuropeMass, AfricaMass, NorthAmericaMass, MiddleAmericaMass, SouthAmericaMass, OceanMass)

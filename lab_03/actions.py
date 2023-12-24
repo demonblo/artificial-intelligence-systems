@@ -305,6 +305,7 @@ def getFiltrationFirst(Sights, AsiaMass, EuropeMass, AfricaMass, NorthAmericaMas
                     print(";(")
                     print("Некорректный ввод, выберите пункт еще раз!")
         elif skipFlag:
+            recomendationsFlag = True
             finalResultMass = resultMass
 
     return finalResultMass
